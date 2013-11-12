@@ -1,0 +1,233 @@
+<!doctype html>
+
+
+<html>
+
+
+<head>
+  <meta charset="utf-8" />
+  <title>Mastery Grids: Launcher</title>
+  
+  <style type="text/css">
+    body                     { background-color: #f5f5f5; margin-bottom: 80px; }
+    body,table,select,input  { font-family: Calibri,Tahoma,sans-serif; font-size: 15px; }
+    div.title                { margin-bottom: 10px; border-bottom: 1px solid #bbbbbb; font-size: 24px; font-weight: bold; }
+    input[type="text"]       { background-color: #ffffff; border: 1px solid #888888; padding-left: 4px; }
+    input.launch             { position: fixed; left: 0px; bottom: 0px; right: 0px; margin: 0px; background-color: #ffd15c; color: #333333; border: 0px; border-top: 1px solid #444444; padding: 12px 40px 12px 40px; font-size: 20px; font-weight: bold; }
+    input.launch:hover       { background-color: #ffc124; color: #000000; }
+    tr.sec td                { padding-top: 20px; font-weight: bold; font-size: 20px; }
+    tr.sec td:first-child    { padding-right: 20px; }
+    td.name                  { padding-right: 20px; }
+    td.lvl-1                 { padding-left: 40px; }
+  </style>
+  
+  <script type="text/javascript">
+    // ------------------------------------------------------------------------------------------------------
+    function $(id) { return document.getElementById(id); }
+    
+    
+    // ------------------------------------------------------------------------------------------------------
+    function ehDataLive() {
+      var styleDisplay = ($("data-live").value === "1" ? "" : "none");
+      
+      $("data-top-n-grp").parentNode.parentNode.style.display = styleDisplay;
+    }
+    
+    
+    // ------------------------------------------------------------------------------------------------------
+    function ehUiTBarVis() {
+      var styleDisplay = ($("ui-tbar-vis").value === "1" ? "" : "none");
+      
+      $("ui-tbar-mode-vis")       .parentNode.parentNode.style.display = styleDisplay;
+      $("ui-tbar-rep-lvl-vis")    .parentNode.parentNode.style.display = styleDisplay;
+      $("ui-tbar-topic-size-vis") .parentNode.parentNode.style.display = styleDisplay;
+      $("ui-tbar-grp-vis")        .parentNode.parentNode.style.display = styleDisplay;
+      $("ui-tbar-res-vis")        .parentNode.parentNode.style.display = styleDisplay;
+    }
+    
+    
+    // ------------------------------------------------------------------------------------------------------
+    function launch() {
+      var params = [];
+      
+      if ($("ui-tbar-vis")            .value === "0" ) params.push("ui-tbar-vis=0");
+      if ($("ui-tbar-mode-vis")       .value === "0" ) params.push("ui-tbar-mode-vis=0");
+      if ($("ui-tbar-rep-lvl-vis")    .value === "0" ) params.push("ui-tbar-rep-lvl-vis=0");
+      if ($("ui-tbar-topic-size-vis") .value === "0" ) params.push("ui-tbar-topic-size-vis=0");
+      if ($("ui-tbar-grp-vis")        .value === "0" ) params.push("ui-tbar-grp-vis=0");
+      if ($("ui-tbar-res-vis")        .value === "0" ) params.push("ui-tbar-res-vis=0");
+      
+      if ($("ui-grid-others-vis")     .value === "0" ) params.push("ui-grid-others-vis=0");
+      
+      if ($("data-live")              .value === "0" ) params.push("data-live=0");
+      if ($("data-top-n-grp")         .value !== "10") params.push("data-top-n-grp=" + $("data-top-n-grp").value);
+      
+      window.open("index.html?usr=" + $("usr").value + "&grp=" + $("grp").value + "&sid=" + $("sid").value + "&cid=" + $("cid").value + (params.length === 0 ? "" : "&" + params.join("&")));
+    }
+  </script>
+</head>
+
+
+<body>
+
+
+<div class="title">Mastery Grids: Launcher</div>
+
+<table>
+
+
+<!-- 1. Session -->
+<tr class="sec"><td>1.</td><td colspan="2">Session</td></tr>
+
+<tr>
+  <td></td>
+  <td class="name">Username</td>
+  <td><input id="usr" type="text" value="peterb" /></td>
+</tr>
+
+<tr>
+  <td></td>
+  <td class="name">Group</td>
+  <td><input id="grp" type="text" value="IS172013Fall" /></td>
+</tr>
+
+<tr>
+  <td></td>
+  <td class="name">Session ID</td>
+  <td><input id="sid" type="text" value="test" /></td>
+</tr>
+
+<tr>
+  <td></td>
+  <td class="name">Course ID</td>
+  <td><input id="cid" type="text" value="1" /></td>
+</tr>
+
+
+<!-- 2. Data -->
+<tr class="sec"><td>2.</td><td colspan="2">Data</td></tr>
+
+<tr>
+  <td></td>
+  <td class="name">Load live data</td>
+  <td>
+    <select id="data-live" onchange="ehDataLive()">
+      <option value="1">Yes</option>
+      <option value="0">No</option>
+    </select>
+  </td>
+</tr>
+
+<tr>
+  <td></td>
+  <td class="name lvl-1">The <i>n</i> in "Top n" group</td>
+  <td>
+    <select id="data-top-n-grp">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10" selected="selected">10</option>
+    </select>
+  </td>
+</tr>
+
+
+<!-- 3. UI: Toolbar -->
+<tr class="sec"><td>3.</td><td colspan="2">UI: Toolbar</td></tr>
+
+<tr>
+  <td></td>
+  <td class="name">Toolbar visible</td>
+  <td>
+    <select id="ui-tbar-vis" onchange="ehUiTBarVis()">
+      <option value="1">Yes</option>
+      <option value="0">No</option>
+    </select>
+  </td>
+</tr>
+
+<tr>
+  <td></td>
+  <td class="name lvl-1">Mode toggle visible</td>
+  <td>
+    <select id="ui-tbar-mode-vis">
+      <option value="1">Yes</option>
+      <option value="0">No</option>
+    </select>
+  </td>
+</tr>
+
+<tr>
+  <td></td>
+  <td class="name lvl-1">Report level toggle visible</td>
+  <td>
+    <select id="ui-tbar-rep-lvl-vis">
+      <option value="1">Yes</option>
+      <option value="0">No</option>
+    </select>
+  </td>
+</tr>
+
+<tr>
+  <td></td>
+  <td class="name lvl-1">Topic size toggle visible</td>
+  <td>
+    <select id="ui-tbar-topic-size-vis">
+      <option value="1">Yes</option>
+      <option value="0">No</option>
+    </select>
+  </td>
+</tr>
+
+<tr>
+  <td></td>
+  <td class="name lvl-1">Group toggle visible</td>
+  <td>
+    <select id="ui-tbar-grp-vis">
+      <option value="1">Yes</option>
+      <option value="0">No</option>
+    </select>
+  </td>
+</tr>
+
+<tr>
+  <td></td>
+  <td class="name lvl-1">Resource toggle visible</td>
+  <td>
+    <select id="ui-tbar-res-vis">
+      <option value="1">Yes</option>
+      <option value="0">No</option>
+    </select>
+  </td>
+</tr>
+
+
+<!-- 4. UI: Grids -->
+<tr class="sec"><td>4.</td><td colspan="2">UI: Grids</td></tr>
+
+<tr>
+  <td></td>
+  <td class="name">Other learners visible</td>
+  <td>
+    <select id="ui-grid-others-vis">
+      <option value="1">Yes</option>
+      <option value="0">No</option>
+    </select>
+  </td>
+</tr>
+
+</table>
+
+<input type="button" value="Launch!" class="launch" onclick="launch();" />
+
+
+</body>
+
+
+</html>
